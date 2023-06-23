@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\ArticleController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-
+/*
 Route::get('about', function () {
 	
 	$team = [
@@ -29,4 +33,18 @@ Route::get('about', function () {
 	
     return view('about', ['team' => $team]);
 });
+*/
+
+
+Route::get('about', [PageController::class, 'about']);
+Route::get('team', [PageController::class, 'team']);
+
+Route::get('rating', [RatingController::class, 'index']);
+
+
+Route::get('articles', [ArticleController::class, 'index'])
+  ->name('articles.index');
+
+
+
 
