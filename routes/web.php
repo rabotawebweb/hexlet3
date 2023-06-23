@@ -42,23 +42,5 @@ Route::get('team', [PageController::class, 'team']);
 Route::get('rating', [RatingController::class, 'index']);
 
 
-Route::get('articles', [ArticleController::class, 'index'])
-  ->name('articles.index');
-
-
-Route::get('articles/create', [ArticleController::class, 'create'])
-  ->name('articles.create');
-// POST-запрос
-Route::post('articles', [ArticleController::class, 'store'])
-  ->name('articles.store');
-
-Route::get('articles/{id}/edit', [ArticleController::class, 'edit'])
-  ->name('articles.edit'); 
-// Метод PATCH
-Route::patch('articles/{id}', [ArticleController::class, 'update'])
-  ->name('articles.update');  
-  
-Route::get('articles/{id}', [ArticleController::class, 'show'])
-  ->name('articles.show');
-
+Route::resource('articles', ArticleController::class);
 

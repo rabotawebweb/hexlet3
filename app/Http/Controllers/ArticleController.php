@@ -7,28 +7,27 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $articles = Article::paginate(2);
-        
         return view('article.index', compact('articles'));
     }
 
-    public function show($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('article.show', compact('article'));
-    }
-
-    // Вывод формы
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        // Передаем в шаблон вновь созданный объект. Он нужен для вывода формы через Form::model
         $article = new Article();
         return view('article.create', compact('article'));
     }
 
-    // Здесь нам понадобится объект запроса для извлечения данных
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         // Проверка введенных данных
@@ -50,13 +49,28 @@ class ArticleController extends Controller
             ->route('articles.index');
     }
 
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.show', compact('article'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
         $article = Article::findOrFail($id);
         return view('article.edit', compact('article'));
     }
 
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         $article = Article::findOrFail($id);
         $data = $this->validate($request, [
@@ -71,5 +85,12 @@ class ArticleController extends Controller
         return redirect()
             ->route('articles.index');
     }
-    
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }
